@@ -11,6 +11,9 @@ matchinfo = pd.read_csv("data/matchinfo.csv")
 monsters = pd.read_csv("data/matchinfo.csv")
 structures = pd.read_csv("data/structures.csv")
 
+# Some preprocessing
+kills = kills.replace('TooEarly', 'NaN')
+
 # Match class
 class match:
     def __init__(self, address):
@@ -81,3 +84,7 @@ def get_all_matches():
         matches.append(match(match_num_address(i)))
     
     return matches
+
+def plot_map(ax):
+    map_img = plt.imread("data/map.png")
+    ax.imshow(map_img, extent=[0,14900,0,14900])
