@@ -2,6 +2,8 @@ from matplotlib import pyplot as plt
 import numpy as np
 import pandas as pd
 
+import math
+
 # Import all match data
 bans = pd.read_csv("data/bans.csv")
 gold = pd.read_csv("data/gold.csv")
@@ -52,6 +54,26 @@ class match:
         self_kills = self.kills()
         return self_kills.loc[self_kills['Team'] == 'rKills']
     
+    def last_kill(self,minute):
+        #Returns the time since last kill, the kill object, and its index.
+        prev_kills = {}
+        self_kills = self.kills()
+        for index,kill in enumerate(self_kills.values):
+            a = (minute - kill[2])
+            if a > 0:
+                prev_kills[str(a)] = index
+        return min(prev_kills),self_kills.values[prev_kills[min(prev_kills)]],prev_kills[min(prev_kills)]
+    
+    def get_xy(self,index):
+        #Returns the X,Y coordinates of a requested kill
+        kill = self.kills().values[index]
+        return kill[9],kill[10]
+
+    def nexus_distance(self,xy):
+        #returns the distance of a set of x,y coordinates from the blue team's nexus.
+#         return math.dist(xy,(0,0))
+         return math.sqrt(int(xy[0])**2+int(xy[1])**2)
+    
     # ===== MONSTERS =====
     def monsters(self):
         return monsters.loc[monsters['Address'] == self.address]
@@ -68,6 +90,31 @@ class match:
         self_structures = self.structures()
         return self_structures.loc[(self_structures['Team'] == 'rTowers') | (self_structures['Team'] == 'rInhibs')]
     
+    def last_structure(self,minute):
+        #Returns the time since last structure taken, the structure object, and its index.
+        prev_structures = {}
+        self_structures = self.structures()
+        for index,structure in enumerate(self_structures.values):
+            a = (minute - structure[2])
+            if a > 0:
+                prev_structures[str(a)] = index
+        return min(prev_structures),self_structures.values[prev_structures[min(prev_structures)]],prev_structures[min(prev_structures)]
+    
+    # ===== GAME STATE TEST =====
+    def game_state(self,minute):
+        #Returns a test gamestate tuple for a given minute.
+        minute = minute
+        last_kill = self.last_kill(minute)
+        last_structure = self.last_structure(minute)
+        data = {"minute":minute,
+                "Time since last kill":[last_kill[0]], 
+                "Last kill blue":[last_kill[1][1] == "bKills"],
+                "last kill distance":[self.nexus_distance(self.get_xy(last_kill[2]))],
+                "Time since last structure":[last_structure[0]],
+                "Last structure blue":[last_structure[1][1] == "bTowers"],
+                "Gold diff":[self.gold_type("golddiff")[minute-1]]
+               }
+        return pd.DataFrame.from_dict(data)
     
 # ==== HELPERS =====
 
