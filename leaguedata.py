@@ -25,6 +25,11 @@ class match:
     def bResult(self):
         return (self.info()['bResult'] == 1).bool()
     
+    def length(self):
+        golddiff = np.array(self.gold_type('golddiff'))
+        golddiff = golddiff[~pd.isnull(golddiff)]
+        return len(golddiff)
+    
     # ===== BANS =====
     def bans(self):
         return bans.loc[bans['Address'] == self.address]
