@@ -224,10 +224,11 @@ class match:
 #             last_structure_time = [nd]
 #             prev_red_structures = [nd]
 #             prev_blue_structures = [nd]
-        
+        bluegold = self.gold_type("goldblue")[minute-1]
         golddiff = self.gold_type("golddiff")[minute-1]
         oldgolddiff = self.gold_type("golddiff")[minute-4] if minute>3 else 0
-        data = {"minute":minute,
+        data = {"Address":self.info()['Address'].values,
+                "minute":[minute],
                 "Blue kills":[len(prev_kills(minute,"blue").index)],
                 "Blue Deaths":[len(prev_kills(minute,"red").index)],
                 "Kill freq":[self.kill_freq(minute)],
@@ -238,6 +239,7 @@ class match:
                 "Structure freq":[self.structure_freq(minute)],
                 "Blue structure freq":[self.structure_freq(minute,team_type = "blue")],
                 "Red structure freq":[self.structure_freq(minute,team_type = "red")],
+                "Bluegold":[bluegold],
                 "Gold diff":[golddiff],
                 "Delta Golld diff":[golddiff - oldgolddiff],
                 "Blue Win": [self.bResult()]
