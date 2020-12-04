@@ -228,9 +228,9 @@ class match:
         golddiff = self.gold_type("golddiff")[minute-1]
         oldgolddiff = self.gold_type("golddiff")[minute-4] if minute>3 else 0
         data = {"Address":self.info()['Address'].values,
-                "minute":[minute],
+                "Minute":[minute],
                 "Blue kills":[len(prev_kills(minute,"blue").index)],
-                "Blue Deaths":[len(prev_kills(minute,"red").index)],
+                "Blue deaths":[len(prev_kills(minute,"red").index)],
                 "Kill freq":[self.kill_freq(minute)],
                 "Blue kill freq":[self.kill_freq(minute,team_type = "blue")],
                 "Blue death freq":[self.kill_freq(minute,team_type = "red")],
@@ -239,14 +239,22 @@ class match:
                 "Structure freq":[self.structure_freq(minute)],
                 "Blue structure freq":[self.structure_freq(minute,team_type = "blue")],
                 "Red structure freq":[self.structure_freq(minute,team_type = "red")],
-                "Bluegold":[bluegold],
+                "Blue gold":[bluegold],
                 "Gold diff":[golddiff],
-                "Delta Gold diff":[golddiff - oldgolddiff],
-                "Blue Win": [self.bResult()]
+                "Delta gold diff":[golddiff - oldgolddiff],
+                "Blue win": [self.bResult()]
                }
         return pd.DataFrame.from_dict(data)
     
 # ==== HELPERS =====
+
+def standardise(data,means=[],stds=[]):
+    if len(means) == 0:
+        means = data.mean(axis=0)
+    if len(stds) == 0:
+        stds = data.std(axis=0)
+    return (data-means)/stds, means, stds
+
 
 def match_num_address(num):
     return matchinfo['Address'][num]
