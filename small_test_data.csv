@@ -1,4 +1,4 @@
-,Address,minute,Blue kills,Blue Deaths,Kill freq,Blue kill freq,Blue death freq,Red structures taken,Blue structures lost,Structure freq,Blue structure freq,Red structure freq,Bluegold,Gold diff,Delta Gold diff,Blue Win
+,Address,Minute,Blue kills,Blue deaths,Kill freq,Blue kill freq,Blue death freq,Red structures taken,Blue structures lost,Structure freq,Blue structure freq,Red structure freq,Blue gold,Gold diff,Delta gold diff,Blue win
 0,http://matchhistory.na.leagueoflegends.com/en/#match-details/TRLH1/30030?gameHash=fbb300951ad8327c,1,0,0,0.0,0.0,0.0,0,0,0.0,0.0,0.0,2415.0,0.0,0.0,True
 1,http://matchhistory.na.leagueoflegends.com/en/#match-details/TRLH1/30030?gameHash=fbb300951ad8327c,2,0,0,0.0,0.0,0.0,0,0,0.0,0.0,0.0,2415.0,0.0,0.0,True
 2,http://matchhistory.na.leagueoflegends.com/en/#match-details/TRLH1/30030?gameHash=fbb300951ad8327c,3,0,0,0.0,0.0,0.0,0,0,0.0,0.0,0.0,2711.0,-14.0,-14.0,True
