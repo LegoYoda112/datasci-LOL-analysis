@@ -241,7 +241,7 @@ class match:
                 "Red structure freq":[self.structure_freq(minute,team_type = "red")],
                 "Bluegold":[bluegold],
                 "Gold diff":[golddiff],
-                "Delta Golld diff":[golddiff - oldgolddiff],
+                "Delta Gold diff":[golddiff - oldgolddiff],
                 "Blue Win": [self.bResult()]
                }
         return pd.DataFrame.from_dict(data)
