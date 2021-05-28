@@ -8,7 +8,7 @@ gold = pd.read_csv("data/gold.csv")
 kills = pd.read_csv("data/kills.csv")
 LOL = pd.read_csv("data/LeagueofLegends.csv")
 matchinfo = pd.read_csv("data/matchinfo.csv")
-monsters = pd.read_csv("data/matchinfo.csv")
+monsters = pd.read_csv("data/monsters.csv")
 structures = pd.read_csv("data/structures.csv")
 
 def match_num_address(match_num):
